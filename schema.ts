@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm';
+import { InferSelectModel, sql } from 'drizzle-orm';
 import {
   pgTable,
   text,
@@ -95,3 +95,5 @@ export const properties = pgTable('property', {
     .defaultNow()
     .$onUpdate(() => new Date()),
 });
+
+export type SelectProperty = InferSelectModel<typeof properties>;
