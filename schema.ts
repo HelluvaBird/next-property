@@ -1,9 +1,13 @@
+import { sql } from 'drizzle-orm';
 import {
   pgTable,
   text,
   integer,
   timestamp,
   primaryKey,
+  serial,
+  varchar,
+  boolean,
 } from 'drizzle-orm/pg-core';
 import { AdapterAccount } from 'next-auth/adapters';
 
@@ -60,3 +64,34 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const properties = pgTable('property', {
+  id: serial('id').notNull().primaryKey(),
+  ownerId: text('owner_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  name: varchar('name').notNull(),
+  type: varchar('type').notNull(),
+  description: text('description').notNull(),
+  street: varchar('street').notNull(),
+  city: varchar('city').notNull(),
+  state: varchar('state').notNull(),
+  zipcode: varchar('zipcode').notNull(),
+  beds: integer('beds').notNull(),
+  baths: integer('baths').notNull(),
+  squareFeet: integer('square_feet').notNull(),
+  amenities: text('amenities')
+    .array()
+    .default(sql`'{}'::text[]`),
+  images: text('images')
+    .array()
+    .default(sql`'{}'::text[]`),
+  nightlyRate: integer('nightly_rate'),
+  weeklyRate: integer('weekly_rate'),
+  monthlyRate: integer('monthly_rate'),
+  isFeatured: boolean('is_featured').notNull().default(false),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at')
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
