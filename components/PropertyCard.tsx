@@ -1,8 +1,8 @@
 import { SelectProperty } from '@/schema';
-import Image from 'next/image';
 import { FaParking } from 'react-icons/fa';
 import { FaBath, FaBookmark, FaWifi } from 'react-icons/fa6';
 import { IoIosBed } from 'react-icons/io';
+import PropertyCardImage from './PropertyCardImage';
 
 export default function PropertyCard({
   property,
@@ -31,13 +31,7 @@ export default function PropertyCard({
   return (
     <div className="p-4 grid gap-2 ring-1 ring-black ring-opacity-5 shadow-lg hover:shadow-xl hover:ring-opacity-10 transition-shadow rounded-lg">
       <div className="h-[300px] relative">
-        <Image
-          alt=""
-          src={`/images/d3.jpg`}
-          fill
-          sizes="33vw"
-          className="w-auto object-cover rounded-lg"
-        />
+        <PropertyCardImage src={`next-property/${property.images![0]}`} />
         <div className="absolute bg-white size-10 rounded-full top-2 right-2 flex items-center justify-center hover:cursor-pointer">
           <FaBookmark className="size-5 fill-rose-500" />
         </div>
