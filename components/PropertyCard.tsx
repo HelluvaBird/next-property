@@ -4,31 +4,13 @@ import { FaBath, FaBookmark, FaWifi } from 'react-icons/fa6';
 import { IoIosBed } from 'react-icons/io';
 import PropertyCardImage from './PropertyCardImage';
 import Link from 'next/link';
+import { getPrice, getPriceText } from '@/utils/utils';
 
 export default function PropertyCard({
   property,
 }: {
   property: SelectProperty;
 }) {
-  const getPrice = () => {
-    if (property.weeklyRate) {
-      return property.weeklyRate;
-    } else if (property.nightlyRate) {
-      return property.nightlyRate;
-    } else {
-      return property.monthlyRate;
-    }
-  };
-
-  const getPriceText = () => {
-    if (property.weeklyRate) {
-      return 'week';
-    } else if (property.nightlyRate) {
-      return 'night';
-    } else {
-      return 'month';
-    }
-  };
   return (
     <Link href={`/property/${property.id}`}>
       <div className="p-4 grid gap-2 ring-1 ring-black ring-opacity-5 shadow-lg hover:shadow-xl hover:ring-opacity-10 transition-shadow rounded-lg">
@@ -52,11 +34,15 @@ export default function PropertyCard({
               </p>
               <p className="text-sm font-light whitespace-nowrap overflow-hidden text-ellipsis">{`${property.street}, ${property.city}, ${property.state}`}</p>
               <p className="space-x-1 whitespace-nowrap overflow-hidden text-ellipsis">
-                <span className="text-rose-500 font-semibold text-xl">{`${getPrice()!.toLocaleString(
-                  'en-US',
-                  { currency: 'USD', style: 'currency' }
-                )}`}</span>
-                <span className="font-light text-sm">per {getPriceText()}</span>
+                <span className="text-rose-500 font-semibold text-xl">{`${getPrice(
+                  property
+                )!.toLocaleString('en-US', {
+                  currency: 'USD',
+                  style: 'currency',
+                })}`}</span>
+                <span className="font-light text-sm">
+                  per {getPriceText(property)}
+                </span>
               </p>
             </div>
             <div className="text-center">
