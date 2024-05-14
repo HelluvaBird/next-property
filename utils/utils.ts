@@ -19,3 +19,7 @@ export const getPriceText = (property: SelectProperty) => {
     return 'month';
   }
 };
+
+export const formatStreetName = (street: string) => {
+  return street.split(' ').join('+');
+};

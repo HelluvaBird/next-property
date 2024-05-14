@@ -1,10 +1,11 @@
 import { getProperty } from '@/app/action';
 import PropertyCardImage from '@/components/PropertyCardImage';
-import { getPrice, getPriceText } from '@/utils/utils';
+import { formatStreetName, getPrice, getPriceText } from '@/utils/utils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { FaBath, FaChevronLeft, FaRulerCombined } from 'react-icons/fa6';
 import { IoIosBed } from 'react-icons/io';
+import { GoogleMapsEmbed } from '@next/third-parties/google';
 
 export default async function PropertyPage({
   params: { id },
@@ -101,6 +102,15 @@ export default async function PropertyPage({
               ))}
             </div>
           </div>
+          <GoogleMapsEmbed
+            apiKey={process.env.GOOGLE_CLOUD_API_KEY!}
+            height={300}
+            width="100%"
+            mode="place"
+            q={`${formatStreetName(property.street)},${property.city},${
+              property.state
+            }`}
+          />
           <p className="text-sm">
             Property last updated on:{' '}
             {property.updatedAt?.toLocaleDateString('en-US', {
