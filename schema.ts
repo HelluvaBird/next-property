@@ -1,4 +1,4 @@
-import { InferSelectModel, sql } from 'drizzle-orm';
+import { InferSelectModel, relations, sql } from 'drizzle-orm';
 import {
   pgTable,
   text,
@@ -95,5 +95,12 @@ export const properties = pgTable('property', {
     .defaultNow()
     .$onUpdate(() => new Date()),
 });
+
+export const propertyOwnerInfo = relations(properties, ({ one }) => ({
+  ownerInfo: one(users, {
+    fields: [properties.ownerId],
+    references: [users.id],
+  }),
+}));
 
 export type SelectProperty = InferSelectModel<typeof properties>;

@@ -24,5 +24,12 @@ export async function getProperty(id: string) {
   }
   return await db.query.properties.findFirst({
     where: eq(properties.id, Number(id)),
+    with: {
+      ownerInfo: {
+        columns: {
+          name: true,
+        },
+      },
+    },
   });
 }
