@@ -38,7 +38,7 @@ export default function Hero() {
                 <input
                   id="hero-email"
                   type="email"
-                  className="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
+                  className="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
                   placeholder="Enter a location"
                 />
               </div>

@@ -15,7 +15,7 @@ export default function ReadyToRent() {
           backgroundColor="bg-rose-100"
           buttonInfo={{
             text: 'Add Property',
-            href: '/properties',
+            href: '/property/add',
             backgroundColor: 'bg-rose-500',
           }}
         />
