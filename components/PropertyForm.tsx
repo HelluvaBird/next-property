@@ -37,10 +37,13 @@ export default function PropertyForm() {
           <select
             name="type"
             id="type"
-            defaultValue="Please select a type"
+            defaultValue=""
+            required
             className="sm:col-span-2 max-w-md w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           >
-            <option disabled>Please select a type</option>
+            <option value="" disabled>
+              Please select a type
+            </option>
             <option value="Apartment">Apartment</option>
             <option value="Condo">Condo</option>
             <option value="House">House</option>
@@ -56,6 +59,7 @@ export default function PropertyForm() {
             type="text"
             name="name"
             id="name"
+            required
             placeholder="Cozy Bungaloo, Modern City Apartment"
             className="sm:col-span-2 max-w-xl w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-400 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -66,6 +70,7 @@ export default function PropertyForm() {
             type="text"
             name="street"
             id="street"
+            required
             className="sm:col-span-2 max-w-xl w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -75,6 +80,7 @@ export default function PropertyForm() {
             type="text"
             name="city"
             id="city"
+            required
             className="sm:col-span-2 max-w-md w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -84,6 +90,7 @@ export default function PropertyForm() {
             type="text"
             name="state"
             id="state"
+            required
             className="sm:col-span-2 max-w-md justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -93,6 +100,7 @@ export default function PropertyForm() {
             type="text"
             name="zipcode"
             id="zipcode"
+            required
             className=" sm:col-span-2 max-w-md justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -104,6 +112,7 @@ export default function PropertyForm() {
             rows={5}
             name="description"
             id="description"
+            required
             className="sm:col-span-2 max-w-xl justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -125,6 +134,7 @@ export default function PropertyForm() {
                 type="text"
                 name="weekly"
                 id="weekly"
+                required
                 className="flex-1 max-w-sm border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
@@ -145,6 +155,7 @@ export default function PropertyForm() {
             type="text"
             name="beds"
             id="beds"
+            required
             className="sm:col-span-2 max-w-sm justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -154,6 +165,7 @@ export default function PropertyForm() {
             type="text"
             name="baths"
             id="baths"
+            required
             className="sm:col-span-2 max-w-sm justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -163,6 +175,7 @@ export default function PropertyForm() {
             type="text"
             name="squareFeet"
             id="squareFeet"
+            required
             className="sm:col-span-2 max-w-sm justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
         </div>
@@ -178,7 +191,7 @@ export default function PropertyForm() {
                   type="checkbox"
                   name="amenities"
                   id={amenity.toLowerCase()}
-                  value={amenity.toLowerCase()}
+                  value={amenity}
                   className="size-4 accent-rose-500 outline-none ring-2 ring-offset-2 ring-offset-transparent ring-transparent focus-visible:ring-rose-500 focus-visible:ring-offset-rose-100"
                 />
                 <label

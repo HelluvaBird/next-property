@@ -1,4 +1,9 @@
-import { InferSelectModel, relations, sql } from 'drizzle-orm';
+import {
+  InferInsertModel,
+  InferSelectModel,
+  relations,
+  sql,
+} from 'drizzle-orm';
 import {
   pgTable,
   text,
@@ -104,3 +109,4 @@ export const propertyOwnerInfo = relations(properties, ({ one }) => ({
 }));
 
 export type SelectProperty = InferSelectModel<typeof properties>;
+export type InsertProperty = InferInsertModel<typeof properties>;
