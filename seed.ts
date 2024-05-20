@@ -41,7 +41,12 @@ const properties = [
     weeklyRate: 1100,
     monthlyRate: 4200,
 
-    images: ['a1.jpg', 'a2.jpg', 'a3.jpg'],
+    images: [
+      'next-property/property-1-1_kzwyks',
+      'next-property/property-1-2_r5nfkj',
+      'next-property/property-1-3_ti925u',
+      'next-property/property-1-4_zkv2lx',
+    ],
     isFeatured: false,
   },
   {
@@ -75,7 +80,11 @@ const properties = [
     weeklyRate: 1000,
     monthlyRate: 4000,
 
-    images: ['b1.jpg', 'b2.jpg', 'b3.jpg'],
+    images: [
+      'next-property/property-2-1_p7taha',
+      'next-property/property-2-2_wvl4vl',
+      'next-property/property-2-3_hk00bd',
+    ],
     isFeatured: false,
   },
   {
@@ -114,7 +123,12 @@ const properties = [
     weeklyRate: 750,
     monthlyRate: 3300,
 
-    images: ['c1.jpg', 'c2.jpg', 'c3.jpg'],
+    images: [
+      'next-property/property-3-1_pbo846',
+      'next-property/property-3-2_kbsgbc',
+      'next-property/property-3-3_b9ahuu',
+      'next-property/property-3-4_ue46lb',
+    ],
     isFeatured: false,
   },
   {
@@ -138,7 +152,11 @@ const properties = [
     ],
     weeklyRate: 2000,
 
-    images: ['d1.jpg', 'd2.jpg', 'd3.jpg'],
+    images: [
+      'next-property/property-4-1_zf1qco',
+      'next-property/property-4-2_nyj8g1',
+      'next-property/property-4-3_bb4zjn',
+    ],
     isFeatured: false,
   },
   {
@@ -165,7 +183,12 @@ const properties = [
     weeklyRate: 1100,
     monthlyRate: 4200,
 
-    images: ['e1.jpg', 'e2.jpg', 'e3.jpg'],
+    images: [
+      'next-property/property-5-1_lwgiuq',
+      'next-property/property-5-2_j67zoz',
+      'next-property/property-5-3_vxp1lq',
+      'next-property/property-5-4_lvhhhj',
+    ],
     isFeatured: true,
   },
   {
@@ -193,7 +216,11 @@ const properties = [
     nightlyRate: 500,
     weeklyRate: 2500,
 
-    images: ['f1.jpg', 'f2.jpg', 'f3.jpg'],
+    images: [
+      'next-property/property-6-1_f4l07h',
+      'next-property/property-6-2_t0n3xb',
+      'next-property/property-6-3_yute5y',
+    ],
     isFeatured: true,
   },
   {
@@ -220,7 +247,12 @@ const properties = [
     nightlyRate: 475,
     weeklyRate: 2000,
 
-    images: ['g1.jpg', 'g2.jpg', 'g3.jpg'],
+    images: [
+      'next-property/property-7-1_ysdnkh',
+      'next-property/property-7-2_f9hbt3',
+      'next-property/property-7-3_j5m6vc',
+      'next-property/property-7-4_ep6a1k',
+    ],
     isFeatured: false,
   },
   {
@@ -247,7 +279,11 @@ const properties = [
     nightlyRate: 300,
     weeklyRate: 1100,
 
-    images: ['h1.jpg', 'h2.jpg', 'h3.jpg'],
+    images: [
+      'next-property/property-8-1_ygo6lp',
+      'next-property/property-8-2_w89pxn',
+      'next-property/property-8-3_vgxp4u',
+    ],
     isFeatured: false,
   },
   {
@@ -275,7 +311,11 @@ const properties = [
     weeklyRate: 1000,
     monthlyRate: 3800,
 
-    images: ['i1.jpg', 'i2.jpg', 'i3.jpg'],
+    images: [
+      'next-property/property-9-1_kq3ega',
+      'next-property/property-9-2_jgsrkt',
+      'next-property/property-9-3_qpxxnn',
+    ],
     isFeatured: false,
   },
   {
@@ -303,7 +343,11 @@ const properties = [
     weeklyRate: 550,
     monthlyRate: 2100,
 
-    images: ['j1.jpg', 'j2.jpg', 'j3.jpg'],
+    images: [
+      'next-property/property-10-1_teq07k',
+      'next-property/property-10-2_oiky8i',
+      'next-property/property-10-3_hzazr0',
+    ],
     isFeatured: false,
   },
 ];

@@ -15,7 +15,7 @@ export default function PropertyCard({
     <Link href={`/property/${property.id}`}>
       <div className="p-4 grid gap-2 ring-1 ring-black ring-opacity-5 shadow-lg hover:shadow-xl hover:ring-opacity-10 transition-shadow rounded-lg">
         <div className="h-[300px] relative">
-          <PropertyCardImage src={`next-property/${property.images![0]}`} />
+          <PropertyCardImage src={`${property.images![0]}`} />
           <div className="absolute bg-white size-10 rounded-full top-2 right-2 flex items-center justify-center hover:cursor-pointer">
             <FaBookmark className="size-5 fill-rose-500" />
           </div>
