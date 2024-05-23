@@ -29,7 +29,7 @@ export default async function PropertyPage({
       <div className="grid sm:grid-cols-3 gap-2 mt-8">
         {property.images?.map((image) => (
           <div key={image} className="relative h-96">
-            <PropertyCardImage src={`next-property/${image}`} />
+            <PropertyCardImage src={`${image}`} />
           </div>
         ))}
       </div>
