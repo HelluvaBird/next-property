@@ -3,7 +3,7 @@
 import { auth, signIn, signOut } from '@/auth';
 import { db } from '@/drizzle';
 import { eq } from 'drizzle-orm';
-import { InsertProperty, properties } from '@/schema';
+import { InsertProperty, properties, users } from '@/schema';
 import { notFound, redirect } from 'next/navigation';
 import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from 'next/cache';
@@ -32,6 +32,22 @@ export async function getProperty(id: string) {
           name: true,
         },
       },
+    },
+  });
+}
+
+export async function getProfileDetails() {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  return await db.query.users.findFirst({
+    where: eq(users.id, session.user?.id!),
+    columns: {
+      name: true,
+      email: true,
     },
   });
 }
