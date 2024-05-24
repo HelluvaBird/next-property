@@ -52,6 +52,22 @@ export async function getProfileDetails() {
     },
   });
 }
+export async function getProfileProperties() {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  return await db.query.properties.findMany({
+    where: eq(properties.ownerId, session.user?.id!),
+    columns: {
+      name: true,
+      id: true,
+      street: true,
+    },
+  });
+}
 
 export async function createNewProperty(formData: FormData) {
   const session = await auth();

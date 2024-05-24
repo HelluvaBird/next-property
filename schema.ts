@@ -101,6 +101,28 @@ export const properties = pgTable('property', {
     .$onUpdate(() => new Date()),
 });
 
+export const bookmarks = pgTable(
+  'bookmarks',
+  {
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id),
+    propertyId: integer('property_id')
+      .notNull()
+      .references(() => properties.id),
+  },
+  (bookmark) => ({
+    pk: primaryKey({ columns: [bookmark.userId, bookmark.propertyId] }),
+  })
+);
+
+export const bookmarkPropertyInfo = relations(bookmarks, ({ one }) => ({
+  propertyInfo: one(properties, {
+    fields: [bookmarks.propertyId],
+    references: [properties.id],
+  }),
+}));
+
 export const propertyOwnerInfo = relations(properties, ({ one }) => ({
   ownerInfo: one(users, {
     fields: [properties.ownerId],
