@@ -1,4 +1,5 @@
 import { getProfileDetails } from '@/app/action';
+import Image from 'next/image';
 
 export default async function Hello() {
   const user = await getProfileDetails();
@@ -11,6 +12,15 @@ export default async function Hello() {
         This information will be displayed publicly so be careful what you
         share.
       </p>
+      <div className="mt-8">
+        <Image
+          src={user?.image!}
+          alt={`${user?.name}'s Profile Image`}
+          className="size-24 rounded-lg bg-gray-50"
+          width={96}
+          height={96}
+        />
+      </div>
       <dl className="mt-8 border-t border-gray-200 text-sm leading-6 space-y-6 divide-y divide-gray-100">
         <div className="pt-6 sm:flex">
           <dt className="font-medium sm:flex-none sm:w-64 sm:pe-6 text-gray-900">

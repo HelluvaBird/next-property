@@ -48,6 +48,7 @@ export async function getProfileDetails() {
     columns: {
       name: true,
       email: true,
+      image: true,
     },
   });
 }
