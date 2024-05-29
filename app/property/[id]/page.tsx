@@ -6,13 +6,16 @@ import { notFound } from 'next/navigation';
 import { FaBath, FaChevronLeft, FaRulerCombined } from 'react-icons/fa6';
 import { IoIosBed } from 'react-icons/io';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
+import { SelectProperty } from '@/schema';
 
 export default async function PropertyPage({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  const property = await getProperty(id);
+  const property:
+    | (SelectProperty & { ownerInfo?: { name: string } })
+    | undefined = await getProperty(id);
 
   if (!property) {
     notFound();
@@ -129,7 +132,7 @@ export default async function PropertyPage({
               Contact owner
             </button>
             <p className="text-xs text-center">
-              owner: {property.ownerInfo.name}
+              owner: {property.ownerInfo?.name}
             </p>
           </div>
         </div>

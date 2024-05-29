@@ -130,5 +130,10 @@ export const propertyOwnerInfo = relations(properties, ({ one }) => ({
   }),
 }));
 
+export const propertyBookmarks = relations(properties, ({ many }) => ({
+  bookmarks: many(bookmarks),
+}));
+
 export type SelectProperty = InferSelectModel<typeof properties>;
 export type InsertProperty = InferInsertModel<typeof properties>;
+export type SelectBookmarks = InferSelectModel<typeof bookmarks>;

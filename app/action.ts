@@ -2,8 +2,8 @@
 
 import { auth, signIn, signOut } from '@/auth';
 import { db } from '@/drizzle';
-import { eq } from 'drizzle-orm';
-import { InsertProperty, properties, users } from '@/schema';
+import { and, count, eq } from 'drizzle-orm';
+import { InsertProperty, bookmarks, properties, users } from '@/schema';
 import { notFound, redirect } from 'next/navigation';
 import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from 'next/cache';
@@ -67,6 +67,45 @@ export async function getProfileProperties() {
       street: true,
     },
   });
+}
+export async function getProfileBookmarks() {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  return await db.query.bookmarks.findMany({
+    where: eq(bookmarks.userId, session.user?.id!),
+    with: {
+      propertyInfo: {
+        columns: {
+          id: true,
+          name: true,
+          street: true,
+        },
+      },
+    },
+  });
+}
+
+export async function getUserBookmarks() {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  return await db.query.bookmarks.findMany({
+    where: eq(bookmarks.userId, session.user?.id!),
+  });
+}
+
+export async function getPropertyCardSaves(id: number) {
+  return await db
+    .select({ value: count() })
+    .from(bookmarks)
+    .where(eq(bookmarks.propertyId, id));
 }
 
 export async function createNewProperty(formData: FormData) {
@@ -146,4 +185,33 @@ export async function createNewProperty(formData: FormData) {
   await db.insert(properties).values(newProperty);
   revalidatePath('/properties');
   redirect('/properties');
+}
+
+export async function addBookmark(propertyId: number) {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  await db.insert(bookmarks).values({
+    userId: session.user?.id!,
+    propertyId,
+  });
+}
+export async function deleteBookmark(propertyId: number) {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  await db
+    .delete(bookmarks)
+    .where(
+      and(
+        eq(bookmarks.userId, session.user?.id!),
+        eq(bookmarks.propertyId, propertyId)
+      )
+    );
 }

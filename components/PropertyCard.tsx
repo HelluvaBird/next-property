@@ -1,17 +1,22 @@
-import { SelectProperty } from '@/schema';
 import { FaParking } from 'react-icons/fa';
 import { FaBath, FaWifi } from 'react-icons/fa6';
 import { IoIosBed } from 'react-icons/io';
-import PropertyCardImage from './PropertyCardImage';
 import Link from 'next/link';
+import PropertyCardImage from './PropertyCardImage';
 import { getPrice, getPriceText } from '@/utils/utils';
+import { SelectProperty } from '@/schema';
 import Bookmark from './Bookmark';
+import { getPropertyCardSaves, getUserBookmarks } from '@/app/action';
 
-export default function PropertyCard({
+export default async function PropertyCard({
   property,
 }: {
   property: SelectProperty;
 }) {
+  const [saves, bookmarks] = await Promise.all([
+    getPropertyCardSaves(property.id),
+    getUserBookmarks(),
+  ]);
   return (
     <div className="relative">
       <Link href={`/property/${property.id}`}>
@@ -25,7 +30,7 @@ export default function PropertyCard({
                 {property.type}
               </span>
               <span className="py-1 px-2 bg-green-100 rounded-lg">
-                For Rent
+                Saved: {saves[0].value}
               </span>
             </div>
             <div className="flex mt-2">
@@ -87,7 +92,7 @@ export default function PropertyCard({
         </div>
       </Link>
       <div className="absolute z-[1] top-6 right-6">
-        <Bookmark />
+        <Bookmark bookmarks={bookmarks} propertyId={property.id} />
       </div>
     </div>
   );
