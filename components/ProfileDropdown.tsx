@@ -9,7 +9,10 @@ import { HiOutlineBell } from 'react-icons/hi';
 export const defaultImage =
   'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80';
 
-export const userNavigation = [{ name: 'Your Profile', href: '/profile' }];
+export const userNavigation = [
+  { name: 'Add Property', href: '/property/add' },
+  { name: 'Your Profile', href: '/profile' },
+];
 
 export default function ProfileDropdown({ user }: { user: User }) {
   return (
