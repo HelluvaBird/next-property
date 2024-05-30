@@ -22,7 +22,11 @@ export default async function PropertyCard({
       <Link href={`/property/${property.id}`}>
         <div className="p-4 grid gap-2 ring-1 ring-black ring-opacity-5 shadow-lg hover:shadow-xl hover:ring-opacity-10 transition-shadow rounded-lg">
           <div className="h-[300px] relative">
-            <PropertyCardImage src={`${property.images![0]}`} />
+            {property.images && property.images.length > 0 ? (
+              <PropertyCardImage src={`${property.images[0]}`} />
+            ) : (
+              <div className="bg-gray-500 h-full rounded-lg"></div>
+            )}
           </div>
           <div>
             <div className="flex items-center justify-between text-sm font-medium">

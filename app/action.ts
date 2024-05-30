@@ -138,7 +138,11 @@ export async function createNewProperty(formData: FormData) {
   const amenities = formData.getAll('amenities') as string[];
   let imagePublicIds: string[] = [];
 
-  if (images.length > 0) {
+  if (
+    images.length > 0 &&
+    images[0].name !== 'undefined' &&
+    images[0].size > 0
+  ) {
     const imagePromises: Promise<string>[] = [];
 
     for (const image of images) {
