@@ -1,4 +1,4 @@
-import { getProfileProperties } from '@/app/action';
+import { deleteProperty, getProfileProperties } from '@/app/action';
 
 export default async function PropertiesPage() {
   const myProperties = await getProfileProperties();
@@ -13,30 +13,36 @@ export default async function PropertiesPage() {
       </p>
 
       <dl className="mt-8 border-t border-gray-200 text-sm leading-6 space-y-6 divide-y divide-gray-100">
-        {myProperties?.map((property) => (
-          <div key={property.id} className="pt-6 sm:flex">
-            <dt className="font-medium sm:flex-none sm:w-64 sm:pe-6 text-gray-900">
-              {property.name}
-            </dt>
-            <dd className="mt-1 sm:mt-0 sm:flex-auto flex justify-between gap-x-6">
-              <p>{property.street}</p>
-              <form action="" className="flex gap-6">
-                <button
-                  type="submit"
-                  className="text-sky-600 font-semibold transition-colors hover:text-sky-700"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  className="text-red-600 font-semibold transition-colors hover:text-red-700"
-                >
-                  Delete
-                </button>
-              </form>
-            </dd>
-          </div>
-        ))}
+        {myProperties?.map((property) => {
+          const deletePropertyWithId = deleteProperty.bind(null, property.id);
+          return (
+            <div key={property.id} className="pt-6 sm:flex">
+              <dt className="font-medium sm:flex-none sm:w-64 sm:pe-6 text-gray-900">
+                {property.name}
+              </dt>
+              <dd className="mt-1 sm:mt-0 sm:flex-auto flex justify-between gap-x-6">
+                <p>{property.street}</p>
+
+                <div className="flex gap-6">
+                  <button
+                    type="submit"
+                    className="text-sky-600 font-semibold transition-colors hover:text-sky-700"
+                  >
+                    Edit
+                  </button>
+                  <form action={deletePropertyWithId}>
+                    <button
+                      type="submit"
+                      className="text-red-600 font-semibold transition-colors hover:text-red-700"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </dd>
+            </div>
+          );
+        })}
       </dl>
     </div>
   );
