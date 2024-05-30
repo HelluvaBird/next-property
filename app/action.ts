@@ -198,6 +198,8 @@ export async function addBookmark(propertyId: number) {
     userId: session.user?.id!,
     propertyId,
   });
+
+  revalidatePath('/properties');
 }
 export async function deleteBookmark(propertyId: number) {
   const session = await auth();
@@ -214,4 +216,5 @@ export async function deleteBookmark(propertyId: number) {
         eq(bookmarks.propertyId, propertyId)
       )
     );
+  revalidatePath('/properties');
 }

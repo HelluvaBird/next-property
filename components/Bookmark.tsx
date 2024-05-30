@@ -1,5 +1,6 @@
 'use client';
 
+import { addBookmark, deleteBookmark } from '@/app/action';
 import { SelectBookmarks } from '@/schema';
 import { useOptimistic } from 'react';
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa6';
@@ -17,11 +18,16 @@ export default function Bookmark({
 
   const [optimisticIsActive, toggleOptimisticIsActive] = useOptimistic(
     !!isActive,
-    (state, optimisticValue: boolean) => !optimisticValue
+    (state) => !state
   );
 
-  const toggleActive = () => {
-    toggleOptimisticIsActive(!!isActive);
+  const toggleActive = async () => {
+    toggleOptimisticIsActive(!isActive);
+    if (isActive) {
+      await deleteBookmark(propertyId);
+    } else {
+      await addBookmark(propertyId);
+    }
   };
   return (
     <form action={toggleActive}>
