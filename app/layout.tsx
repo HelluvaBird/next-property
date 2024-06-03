@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'NextProperty',
   description:
-    'A real estate property buying and renting platform made with NextJS and TailwindCSS',
+    'A real estate property renting platform made with NextJS and TailwindCSS',
 };
 
 export default function RootLayout({
