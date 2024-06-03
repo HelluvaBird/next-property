@@ -1,6 +1,7 @@
-import { createNewProperty } from '@/app/action';
+import { createNewProperty, updateProperty } from '@/app/action';
 import { FaImage } from 'react-icons/fa6';
 import PropertyFormSubmitButton from './PropertyFormSubmitButton';
+import { SelectProperty } from '@/schema';
 
 const amenities = [
   'Wifi',
@@ -28,16 +29,27 @@ const amenities = [
   'Ski Equipment Storage',
 ];
 
-export default function PropertyForm() {
+type PropertyFormProps = {
+  editProperty?: SelectProperty;
+};
+
+export default function PropertyForm({ editProperty }: PropertyFormProps) {
+  const updatePropertyWithImages = updateProperty.bind(null, {
+    images: editProperty?.images as string[],
+    propertyId: editProperty?.id as number,
+  });
   return (
-    <form className="mt-8" action={createNewProperty}>
+    <form
+      className="mt-8"
+      action={editProperty ? updatePropertyWithImages : createNewProperty}
+    >
       <div className="divide-y">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 items-center justify-items-start sm:gap-4 pb-6">
           <label htmlFor="type">Property Type</label>
           <select
             name="type"
             id="type"
-            defaultValue=""
+            defaultValue={editProperty?.type ?? ''}
             required
             className="sm:col-span-2 max-w-md w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           >
@@ -59,6 +71,7 @@ export default function PropertyForm() {
             type="text"
             name="name"
             id="name"
+            defaultValue={editProperty?.name ?? ''}
             required
             placeholder="Cozy Bungaloo, Modern City Apartment"
             className="sm:col-span-2 max-w-xl w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-400 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
@@ -70,6 +83,7 @@ export default function PropertyForm() {
             type="text"
             name="street"
             id="street"
+            defaultValue={editProperty?.street ?? ''}
             required
             className="sm:col-span-2 max-w-xl w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -80,6 +94,7 @@ export default function PropertyForm() {
             type="text"
             name="city"
             id="city"
+            defaultValue={editProperty?.city ?? ''}
             required
             className="sm:col-span-2 max-w-md w-full border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -90,6 +105,7 @@ export default function PropertyForm() {
             type="text"
             name="state"
             id="state"
+            defaultValue={editProperty?.state ?? ''}
             required
             className="sm:col-span-2 max-w-md justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -100,6 +116,7 @@ export default function PropertyForm() {
             type="text"
             name="zipcode"
             id="zipcode"
+            defaultValue={editProperty?.zipcode ?? ''}
             required
             className=" sm:col-span-2 max-w-md justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -112,6 +129,7 @@ export default function PropertyForm() {
             rows={5}
             name="description"
             id="description"
+            defaultValue={editProperty?.description ?? ''}
             required
             className="sm:col-span-2 max-w-xl justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -125,6 +143,7 @@ export default function PropertyForm() {
                 type="text"
                 name="nightly"
                 id="nightly"
+                defaultValue={editProperty?.nightlyRate ?? ''}
                 className="flex-1 max-w-sm border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
@@ -134,6 +153,7 @@ export default function PropertyForm() {
                 type="text"
                 name="weekly"
                 id="weekly"
+                defaultValue={editProperty?.weeklyRate ?? ''}
                 required
                 className="flex-1 max-w-sm border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
               />
@@ -144,6 +164,7 @@ export default function PropertyForm() {
                 type="text"
                 name="monthly"
                 id="monthly"
+                defaultValue={editProperty?.monthlyRate ?? ''}
                 className="flex-1 max-w-sm border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
               />
             </div>
@@ -155,6 +176,7 @@ export default function PropertyForm() {
             type="text"
             name="beds"
             id="beds"
+            defaultValue={editProperty?.beds ?? ''}
             required
             className="sm:col-span-2 max-w-sm justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -165,6 +187,7 @@ export default function PropertyForm() {
             type="text"
             name="baths"
             id="baths"
+            defaultValue={editProperty?.baths ?? ''}
             required
             className="sm:col-span-2 max-w-sm justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -175,6 +198,7 @@ export default function PropertyForm() {
             type="text"
             name="squareFeet"
             id="squareFeet"
+            defaultValue={editProperty?.squareFeet ?? ''}
             required
             className="sm:col-span-2 max-w-sm justify-self-stretch border border-gray-300 rounded-md p-2 text-base text-gray-900 placeholder-gray-500 shadow-sm outline-none focus:border-rose-500 focus:ring-rose-500"
           />
@@ -191,6 +215,7 @@ export default function PropertyForm() {
                   type="checkbox"
                   name="amenities"
                   id={amenity.toLowerCase()}
+                  defaultChecked={editProperty?.amenities?.includes(amenity)}
                   value={amenity}
                   className="size-4 accent-rose-500 outline-none ring-2 ring-offset-2 ring-offset-transparent ring-transparent focus-visible:ring-rose-500 focus-visible:ring-offset-rose-100"
                 />
@@ -229,7 +254,9 @@ export default function PropertyForm() {
           </div>
         </div>
         <div className="grid pt-6">
-          <PropertyFormSubmitButton />
+          <PropertyFormSubmitButton
+            text={editProperty ? 'Update property' : 'Add property'}
+          />
         </div>
       </div>
     </form>

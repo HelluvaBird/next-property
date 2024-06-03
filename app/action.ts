@@ -197,6 +197,101 @@ export async function createNewProperty(formData: FormData) {
   redirect('/properties');
 }
 
+export async function updateProperty(
+  property: {
+    images: string[];
+    propertyId: number;
+  },
+  formData: FormData
+) {
+  const session = await auth();
+
+  if (!session) {
+    return await signin();
+  }
+
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
+    api_key: process.env.CLOUDINARY_API_KEY!,
+    api_secret: process.env.CLOUDINARY_API_SECRET!,
+  });
+
+  const images = formData.getAll('file-upload') as File[];
+  const type = formData.get('type') as string;
+  const name = formData.get('name') as string;
+  const street = formData.get('street') as string;
+  const city = formData.get('city') as string;
+  const state = formData.get('state') as string;
+  const zipcode = formData.get('zipcode') as string;
+  const description = formData.get('description') as string;
+  const nightly = formData.get('nightly') as string;
+  const weekly = formData.get('weekly') as string;
+  const monthly = formData.get('monthly') as string;
+  const beds = formData.get('beds') as string;
+  const baths = formData.get('baths') as string;
+  const squareFeet = formData.get('squareFeet') as string;
+  const amenities = formData.getAll('amenities') as string[];
+  let imagePublicIds: string[] = [];
+
+  if (
+    images.length > 0 &&
+    images[0].name !== 'undefined' &&
+    images[0].size > 0
+  ) {
+    const imagePromises: Promise<string>[] = [];
+
+    for (const image of images) {
+      imagePromises.push(
+        new Promise(async (resolve) => {
+          cloudinary.uploader
+            .upload_stream(
+              { folder: 'next-property', resource_type: 'image' },
+              (error, result) => {
+                if (!error && result) {
+                  resolve(result.public_id);
+                } else {
+                  console.log(error);
+                }
+              }
+            )
+            .end(Buffer.from(await image.arrayBuffer()));
+        })
+      );
+    }
+
+    imagePublicIds = await Promise.all(imagePromises);
+  }
+
+  await db
+    .update(properties)
+    .set({
+      type,
+      name,
+      street,
+      city,
+      state,
+      zipcode,
+      description,
+      nightlyRate: Number(nightly),
+      weeklyRate: Number(weekly),
+      monthlyRate: Number(monthly),
+      beds: Number(beds),
+      baths: Number(baths),
+      squareFeet: Number(squareFeet),
+      amenities,
+      images: [...property.images, ...imagePublicIds],
+    })
+    .where(
+      and(
+        eq(properties.id, property.propertyId),
+        eq(properties.ownerId, session.user?.id as string)
+      )
+    );
+  revalidatePath('/properties');
+  revalidatePath('/profile', 'layout');
+  redirect('/profile/properties');
+}
+
 export async function deleteProperty(propertyId: number) {
   const session = await auth();
 

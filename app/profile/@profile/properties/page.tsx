@@ -1,4 +1,5 @@
 import { deleteProperty, getProfileProperties } from '@/app/action';
+import Link from 'next/link';
 
 export default async function PropertiesPage() {
   const myProperties = await getProfileProperties();
@@ -24,12 +25,12 @@ export default async function PropertiesPage() {
                 <p>{property.street}</p>
 
                 <div className="flex gap-6">
-                  <button
-                    type="submit"
+                  <Link
+                    href={`/property/edit/${property.id}`}
                     className="text-sky-600 font-semibold transition-colors hover:text-sky-700"
                   >
                     Edit
-                  </button>
+                  </Link>
                   <form action={deletePropertyWithId}>
                     <button
                       type="submit"
