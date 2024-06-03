@@ -73,8 +73,8 @@ export const verificationTokens = pgTable(
 export const properties = pgTable('property', {
   id: serial('id').notNull().primaryKey(),
   ownerId: text('owner_id')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
+    .references(() => users.id, { onDelete: 'cascade' })
+    .notNull(),
   name: varchar('name').notNull(),
   type: varchar('type').notNull(),
   description: text('description').notNull(),
@@ -105,11 +105,11 @@ export const bookmarks = pgTable(
   'bookmarks',
   {
     userId: text('user_id')
-      .notNull()
-      .references(() => users.id),
+      .references(() => users.id, { onDelete: 'cascade' })
+      .notNull(),
     propertyId: integer('property_id')
-      .notNull()
-      .references(() => properties.id),
+      .references(() => properties.id, { onDelete: 'cascade' })
+      .notNull(),
   },
   (bookmark) => ({
     pk: primaryKey({ columns: [bookmark.userId, bookmark.propertyId] }),
