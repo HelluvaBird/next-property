@@ -3,13 +3,7 @@
 import { auth, signIn, signOut } from '@/auth';
 import { db } from '@/drizzle';
 import { and, count, eq } from 'drizzle-orm';
-import {
-  InsertProperty,
-  SelectProperty,
-  bookmarks,
-  properties,
-  users,
-} from '@/schema';
+import { InsertProperty, bookmarks, properties, users } from '@/schema';
 import { notFound, redirect } from 'next/navigation';
 import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from 'next/cache';
@@ -194,6 +188,7 @@ export async function createNewProperty(formData: FormData) {
 
   await db.insert(properties).values(newProperty);
   revalidatePath('/properties');
+  revalidatePath('/profile', 'layout');
   redirect('/properties');
 }
 
@@ -289,6 +284,8 @@ export async function updateProperty(
     );
   revalidatePath('/properties');
   revalidatePath('/profile', 'layout');
+  revalidatePath('/property/[id]', 'page');
+  revalidatePath('/property/edit/[id]', 'page');
   redirect('/profile/properties');
 }
 
@@ -307,7 +304,10 @@ export async function deleteProperty(propertyId: number) {
         eq(properties.ownerId, session.user.id!)
       )
     );
+  revalidatePath('/properties');
   revalidatePath('/profile', 'layout');
+  revalidatePath('/property/[id]', 'page');
+  revalidatePath('/property/edit/[id]', 'page');
 }
 
 export async function addBookmark(propertyId: number) {
