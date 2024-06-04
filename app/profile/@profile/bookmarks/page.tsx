@@ -13,7 +13,7 @@ export default async function Bookmarks() {
       </p>
 
       <dl className="mt-8 border-t border-gray-200 text-sm leading-6 space-y-6 divide-y divide-gray-100">
-        {bookmarks ? (
+        {bookmarks && bookmarks?.length > 0 ? (
           bookmarks?.map((bookmark) => (
             <div key={bookmark.propertyId} className="pt-6 sm:flex">
               <Link
